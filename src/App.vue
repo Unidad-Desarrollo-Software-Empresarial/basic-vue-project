@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <RouterView />
-  </div>
+  <p>App.vue</p>
 </template>
 
-<script setup lang="ts"></script>
-
-<style scoped></style>
+<script setup>
+</script>
