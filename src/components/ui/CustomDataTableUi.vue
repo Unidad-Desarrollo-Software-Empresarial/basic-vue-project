@@ -17,43 +17,64 @@
         </div>
     </div>
     <div>
-        <fwb-dropdown text="Columnas" class="ml-4 pr-2">
-            <div class="min-w-[300px] max-h-[400px] overflow-auto pl-4">
-                <!-- <p :class="[`p-2 hover:bg-slate-400 hover:rounded-lg  hover:text-white`]" v-for="header in columns" :key="`${header.isShowing}${header.head}`">
-                    {{ header.head }}
-                    <span v-if="header.isShowing" class="text-xs text-slate-400 ">Mostrando</span>
-                </p> -->
-                <div v-for="(header, index) in columns" :key="index" :class="[
-                    `p-2 hover:bg-slate-400 hover:rounded-lg  hover:text-white`,
-                    `flex justify-between`
-                ]" @click="onChangeVisibilityColumn(index)">
-                    <p>{{ header.head }}</p>
-                    <p class="px-4">{{ header.isShowing }}</p>
-                </div>
-            </div>
-        </fwb-dropdown>
+
+
+
+
+
+
+
     </div>
     <div>
-        <fwb-table hoverable>
-            <fwb-table-head>
-                <!-- <div v-if="isFetching"></div> -->
-                <fwb-table-head-cell v-for="head in columns" :key="head.head">
-                    <div v-if="head.isShowing">
-                        {{ head.head }}
+
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <!-- <div class="pb-4 bg-white dark:bg-gray-900">
+                <label for="table-search" class="sr-only">Search</label>
+                <div class="relative mt-1">
+                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
                     </div>
-                </fwb-table-head-cell>
-            </fwb-table-head>
-            <!-- Body -->
-            <fwb-table-body>
-                <fwb-table-row v-for="row in rows" :key="row?.INTER_ID">
-                    <fwb-table-cell v-for="(cell, cellIndex) in Object.values(row ? row : [])" :key="cell">
-                        <div v-show="columns[cellIndex].isShowing">
-                            {{ cell }}
-                        </div>
-                    </fwb-table-cell>
-                </fwb-table-row>
-            </fwb-table-body>
-        </fwb-table>
+                    <input type="text" id="table-search"
+                        class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search for items">
+                </div>
+            </div> -->
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+
+                        <th v-for="(head, headIndex) in columns" :key="headIndex" scope="col"
+                            :class="`${columns[headIndex].isShowing ? 'px-6 py-3' : ''}`">
+                            <div v-show="head.isShowing">
+                                {{ head.head }}
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(row, rowIndex) in rows" :key="rowIndex"
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                        <th v-for="(cell, cellIndex) in Object.values(row ? row : [])" :key="cellIndex" scope="row"
+                            :class="[
+                                ` font-medium text-gray-900 whitespace-nowrap dark:text-white`,
+                                `${columns[cellIndex].isShowing ? 'px-6 py-4' : ''}`
+                            ]">
+                            <div v-show="columns[cellIndex].isShowing">
+                                {{ cell }}
+                            </div>
+                        </th>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
     <div>
         <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4"
@@ -94,6 +115,9 @@
             </ul>
         </nav>
     </div>
+    <div>
+
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -101,12 +125,12 @@ import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 import {
     // FwbA,
-    FwbTable,
-    FwbTableBody,
-    FwbTableCell,
-    FwbTableHead,
-    FwbTableHeadCell,
-    FwbTableRow,
+    // FwbTable,
+    // FwbTableBody,
+    // FwbTableCell,
+    // FwbTableHead,
+    // FwbTableHeadCell,
+    // FwbTableRow,
     FwbDropdown
     // FwbButton
 } from 'flowbite-vue'
