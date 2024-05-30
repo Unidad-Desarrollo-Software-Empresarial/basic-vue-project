@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <!-- <div>
         <div class="p-4 bg-white dark:bg-gray-900">
             <label for="table-search" class="sr-only">Search</label>
             <div class="relative mt-1">
@@ -15,35 +15,46 @@
                     placeholder="Buscar..." />
             </div>
         </div>
-    </div>
+    </div> -->
+
+
     <div>
 
-
-
-
-
-
+        <!-- Dropdown button -->
+        <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
+            data-dropdown-delay="500"
+            class="bg-white-700 shadow-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm mx-4 my-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-white-800 "
+            type="button">Columnas
+            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+            </svg>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="dropdownHover"
+            class="z-10 hidden  bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 mx-4 max-h-[400px] min-w-[400px] overflow-auto">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                <li v-for="(header, index) in columns" :key="index"
+                    class="flex justify-between hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white"
+                    @click="onChangeVisibilityColumn(index)">
+                    <span class="block px-4 py-2 ">{{
+                        header.head }}</span>
+                    <span :class="[
+                        `${header.isShowing ? 'text-green-500' : 'text-red-500'}`,
+                        `block px-4 py-2`,
+                        `hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`
+                    ]">{{ header.isShowing ? 'Visible' : 'Oculto' }}</span>
+                </li>
+            </ul>
+        </div>
 
     </div>
     <div>
 
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <!-- <div class="pb-4 bg-white dark:bg-gray-900">
-                <label for="table-search" class="sr-only">Search</label>
-                <div class="relative mt-1">
-                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </div>
-                    <input type="text" id="table-search"
-                        class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search for items">
-                </div>
-            </div> -->
+
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -121,21 +132,12 @@
 </template>
 
 <script setup lang="ts">
-import { useQuery } from '@tanstack/vue-query'
-import axios from 'axios'
-import {
-    // FwbA,
-    // FwbTable,
-    // FwbTableBody,
-    // FwbTableCell,
-    // FwbTableHead,
-    // FwbTableHeadCell,
-    // FwbTableRow,
-    FwbDropdown
-    // FwbButton
-} from 'flowbite-vue'
-import type { MatrizResponseInterface } from '../interfaces/matriz.interface'
 import { computed, onMounted, ref, watch } from 'vue'
+import { useQuery } from '@tanstack/vue-query'
+import { initFlowbite } from 'flowbite'
+import axios from 'axios'
+
+import type { MatrizResponseInterface } from '../interfaces/matriz.interface'
 
 const { data } = useQuery({
     queryKey: ['matriz'],
@@ -158,6 +160,7 @@ watch(data, () => {
 })
 
 onMounted(() => {
+    initFlowbite()
     if (data.value) {
         columns.value = Object.keys(data.value[0]).map((col) => {
             return { head: col, isShowing: true }

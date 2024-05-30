@@ -1,5 +1,5 @@
 <template>
-  <p>App.vue</p>
+  <!-- <p>App.vue</p> -->
   <CustomDataTableUi />
 </template>
 
