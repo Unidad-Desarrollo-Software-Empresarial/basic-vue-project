@@ -19,7 +19,6 @@
 
 
     <div>
-
         <!-- Dropdown button -->
         <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
             data-dropdown-delay="500"
@@ -48,6 +47,32 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div>
+        <!-- Dropdown número de filas -->
+
+        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-2"
+            class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+            type="button">Mostrar Filas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 4 4 4-4" />
+            </svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdown-2"
+            class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li v-for="(item, index) in optionsRowsPerPage" :key="index">
+                    <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        @click="onChangeRowsPerPage(item)">{{ item
+                        }}</span>
+                </li>
+
+            </ul>
+        </div>
+
 
     </div>
     <div>
@@ -87,43 +112,50 @@
         </div>
 
     </div>
+
     <div>
         <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4"
             aria-label="Table navigation">
             <span
                 class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Mostrando
                 <span class="font-semibold text-gray-900 dark:text-white">1-10</span> de
-                <span class="font-semibold text-gray-900 dark:text-white">1000</span></span>
-            <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Anterior</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Siguiente</a>
-                </li>
-            </ul>
+                <span class="font-semibold text-gray-900 dark:text-white">1000</span>
+
+            </span>
+            <div class="flex flex-col">
+
+
+                <ul class="inline-flex -space-x-px rtl:space-x-reverse text-sm h-8">
+                    <li>
+                        <span
+                            class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @click="onChangeCurrentPage(1)">Inicio</span>
+                    </li>
+                    <li>
+                        <span
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300 hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @click="onBeforeCurrentPage">Anterior</span>
+                    </li>
+                    <li v-for="item in totalPages" :key="item">
+                        <span :class="[
+                            `flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300 hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`,
+                            `${currentPage == item ? 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-white' : 'bg-white'}`
+                        ]" @click="onChangeCurrentPage(item)">{{
+                            item }}</span>
+                    </li>
+                    <li>
+                        <span class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500  border border-gray-300 hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+                            " @click="onNextCurrentPage">Siguiente</span>
+                    </li>
+                    <li>
+                        <span
+                            class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            @click="onChangeCurrentPage(totalPages)">Fin</span>
+                    </li>
+                </ul>
+                <span class="font-normal text-gray-900 dark:text-white justify-end">Páginas en total: {{ totalPages
+                    }}</span>
+            </div>
         </nav>
     </div>
     <div>
@@ -168,14 +200,14 @@ onMounted(() => {
     }
 })
 
-const rowsPerPage = ref<number>(3)
+const rowsPerPage = ref<number>(10)
 const currentPage = ref<number>(1)
 const totalPages = computed(() => {
     return Math.ceil(data.value ? data.value.length / rowsPerPage.value : 0)
 })
 
 const rows = computed(() => {
-    console.log({ currentPage, totalPages })
+    // console.log({ currentPage, totalPages })
     const rowsToShow = data.value ? data.value : []
     return rowsToShow.map((row, index) => {
         if (
@@ -189,6 +221,25 @@ const rows = computed(() => {
 
 const onChangeVisibilityColumn = (index: number) => {
     columns.value[index].isShowing = !columns.value[index].isShowing
+}
+
+const onChangeCurrentPage = (page: number) => {
+    currentPage.value = page
+}
+const onBeforeCurrentPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--
+    }
+}
+const onNextCurrentPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++
+    }
+}
+
+const optionsRowsPerPage = [5, 10, 15, 20, 25, 30]
+const onChangeRowsPerPage = (rows: number) => {
+    rowsPerPage.value = rows
 }
 
 </script>
