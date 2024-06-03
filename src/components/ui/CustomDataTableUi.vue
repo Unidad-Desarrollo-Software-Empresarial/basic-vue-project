@@ -387,6 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
 .custom-table tbody tr:nth-child(even) {
   background-color: #f9f9f9; /* Color de fondo alternativo para filas pares */
 }
+
 /* Estilos de las filas al pasar el mouse sobre ellas */
 .custom-table tbody tr:hover {
   background-color: #e2e2e2; /* Cambia el color de fondo al pasar el mouse */
