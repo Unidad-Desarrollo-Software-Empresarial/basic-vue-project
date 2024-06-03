@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>Tabla de Datos</h1>
         <div class="container">
             <form class="py-2 px-2">
                 <label class="sr-only">Búsqueda</label>
