@@ -15,72 +15,89 @@
     </div>
     <div v-else>
 
+
+        <!-- Input de busqueda -->
+        <div class="absolute right-0">
+            <form class="py-2 px-2">
+                <label class="sr-only">Búsqueda</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                    </div>
+                    <input type="text" @input="search" placeholder="Buscar . . ."
+                        class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+            </form>
+        </div>
         <div>
+
+            <!-- Test dropdown -->
+
             <!-- Dropdown button -->
-            <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
-                data-dropdown-delay="500"
-                class="bg-white-700 shadow-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm mx-4 my-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-white-800 "
-                type="button">Columnas
-                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
-                </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdownHover"
-                class="z-10 hidden  bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 mx-4 max-h-[400px] min-w-[400px] overflow-auto">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                    <li v-for="(header, index) in columns" :key="index"
-                        class="flex justify-between hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white"
-                        @click="onChangeVisibilityColumn(index)">
-                        <span class="block px-4 py-2 ">{{
-                            header.head }}</span>
-                        <span :class="[
-                            `${header.isShowing ? 'text-green-500' : 'text-red-500'}`,
-                            `block px-4 py-2`,
-                            `hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`
-                        ]">{{ header.isShowing ? 'Visible' : 'Oculto' }}</span>
-                    </li>
-                </ul>
+            <div class="relative inline-block text-left">
+
+
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" data-dropdown-delay="200"
+                    class="bg-white-700 shadow-lg hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm mx-4 my-2 px-5 py-2.5 text-center inline-flex items-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-white-800 "
+                    type="button">Columnas
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+                <!-- Dropdown menu -->
+                <div id="dropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-lg w-44 dark:bg-gray-700 mx-4 max-h-[400px] min-w-[400px] overflow-auto">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                        <li v-for="(header, index) in columns" :key="index"
+                            class="flex justify-between hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-gray-600 dark:hover:text-white"
+                            @click="onChangeVisibilityColumn(index)">
+                            <span class="block px-4 py-2 ">{{
+                                header.head }}</span>
+                            <span :class="[
+                                `${header.isShowing ? 'text-green-500' : 'text-red-500'}`,
+                                `block px-4 py-2`,
+                                `hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white`
+                            ]">{{ header.isShowing ? 'Visible' : 'Oculto' }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="relative inline-block text-left">
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-2"
+                    class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+                    type="button">Mostrar Filas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown-2"
+                    class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                        <li v-for="(item, index) in optionsRowsPerPage" :key="index">
+                            <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                                @click="onChangeRowsPerPage(item)">{{ item
+                                }}</span>
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
+
         <div>
-            <!-- Dropdown número de filas -->
-
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown-2"
-                class="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
-                type="button">Mostrar Filas <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 4 4 4-4" />
-                </svg>
-            </button>
-
-            <!-- Dropdown menu -->
-            <div id="dropdown-2"
-                class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                    <li v-for="(item, index) in optionsRowsPerPage" :key="index">
-                        <span class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            @click="onChangeRowsPerPage(item)">{{ item
-                            }}</span>
-                    </li>
-
-                </ul>
-            </div>
-
-
-        </div>
-        <div>
-
-
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-
                             <th v-for="(head, headIndex) in columns" :key="headIndex" scope="col"
                                 :class="`${columns[headIndex].isShowing ? 'px-6 py-3' : ''}`">
                                 <div v-show="head.isShowing">
@@ -90,9 +107,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(row, rowIndex) in rows" :key="rowIndex"
+                        <tr v-for="(row, rowIndex) in filteredItems" :key="rowIndex"
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
                             <th v-for="(cell, cellIndex) in Object.values(row ? row : [])" :key="cellIndex" scope="row"
                                 :class="[
                                     ` font-medium text-gray-900 whitespace-nowrap dark:text-white`,
@@ -102,21 +118,23 @@
                                     {{ cell }}
                                 </div>
                             </th>
-
+                            <th><button @click="handleRowClick(+row.INTER_ID)" type="button"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Editar</button>
+                            </th>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
-
         <div>
             <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4"
                 aria-label="Table navigation">
                 <span
                     class="text-sm font-normal text-gray-500 dark:text-gray-400 mb-4 md:mb-0 block w-full md:inline md:w-auto">Mostrando
-                    <span class="font-semibold text-gray-900 dark:text-white">1-10</span> de
-                    <span class="font-semibold text-gray-900 dark:text-white">1000</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ showingNumberStartRowsCurrentPage
+                        }}-{{ showingNumberEndRowsCurrentPage }}</span>
+                    de
+                    <span class="font-semibold text-gray-900 dark:text-white">{{ totalRows }}</span>
 
                 </span>
                 <div class="flex flex-col">
@@ -164,21 +182,50 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
 import { useQuery } from '@tanstack/vue-query'
-import { initFlowbite } from 'flowbite'
 import axios from 'axios'
 
 import type { MatrizResponseInterface } from '../interfaces/matriz.interface'
+import { initDropdowns } from 'flowbite';
 
 const { data, isPending } = useQuery({
     queryKey: ['matriz'],
     queryFn: async () => {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
         const response = await axios.get<MatrizResponseInterface[]>(
-            'https://gestiondocumental.pucesi.edu.ec/index.php/api/matriz'
+            'http://192.168.0.47:3000/internacionalizacion',
+            {
+                headers: {
+                    apikey: "documental",
+                    apisecret: "Documental2021file"
+                }
+            }
         )
+        console.log(response.data)
         return response.data
     }
 })
+
+const searchFilter = ref<string>('');
+
+const filteredItems = computed(() => {
+    const rowsToShow = data.value ? data.value : [];
+    let items = rowsToShow;
+
+    return items.filter((item, index) => {
+        const withinRange = index >= (currentPage.value - 1) * rowsPerPage.value &&
+            index < currentPage.value * rowsPerPage.value;
+
+        const matchesSearch = Object.values(item).some(value => {
+            return value.toString().toLowerCase().includes(searchFilter.value.toLowerCase());
+        });
+
+        return matchesSearch && withinRange;
+    });
+});
+
+
+const search = (e: any) => {
+    searchFilter.value = e.target.value;
+};
 
 const columns = ref<{ head: string; isShowing: boolean }[]>([])
 
@@ -191,7 +238,7 @@ watch(data, () => {
 })
 
 onMounted(() => {
-    initFlowbite()
+    initDropdowns()
     if (data.value) {
         columns.value = Object.keys(data.value[0]).map((col) => {
             return { head: col, isShowing: true }
@@ -199,24 +246,21 @@ onMounted(() => {
     }
 })
 
-const rowsPerPage = ref<number>(10)
-const currentPage = ref<number>(1)
-const totalPages = computed(() => {
-    return Math.ceil(data.value ? data.value.length / rowsPerPage.value : 0)
-})
 
-const rows = computed(() => {
-    // console.log({ currentPage, totalPages })
-    const rowsToShow = data.value ? data.value : []
-    return rowsToShow.map((row, index) => {
-        if (
-            index >= (currentPage.value - 1) * rowsPerPage.value &&
-            index < currentPage.value * rowsPerPage.value
-        ) {
-            return row
-        }
-    })
-})
+
+
+// const rows = computed(() => {
+//     // console.log({ currentPage, totalPages })
+//     const rowsToShow = data.value ? data.value : []
+//     return rowsToShow.map((row, index) => {
+//         if (
+//             index >= (currentPage.value - 1) * rowsPerPage.value &&
+//             index < currentPage.value * rowsPerPage.value
+//         ) {
+//             return row
+//         }
+//     })
+// })
 
 const onChangeVisibilityColumn = (index: number) => {
     columns.value[index].isShowing = !columns.value[index].isShowing
@@ -237,9 +281,36 @@ const onNextCurrentPage = () => {
 }
 
 const optionsRowsPerPage = [5, 10, 15, 20, 25, 30, 50]
+const rowsPerPage = ref<number>(optionsRowsPerPage[0])
 const onChangeRowsPerPage = (rows: number) => {
     rowsPerPage.value = rows
 }
+const currentPage = ref<number>(1)
+const totalPages = computed(() => {
+    return Math.ceil(data.value ? data.value.length / rowsPerPage.value : 0)
+})
+const totalRows = computed(() => {
+    return data.value ? data.value.length : 0
+})
+const showingNumberStartRowsCurrentPage = computed(() => {
+
+    return data.value ? ((rowsPerPage.value * (currentPage.value - 1)) + 1) : 0
+})
+const showingNumberEndRowsCurrentPage = computed(() => {
+    if (rowsPerPage.value * currentPage.value > totalRows.value) {
+        return totalRows.value
+    }
+    return data.value ? (rowsPerPage.value * currentPage.value) : 0
+})
+
+
+let selectedIndex = ref<number | null>(null);
+
+const handleRowClick = (index: number) => {
+    selectedIndex.value = index;
+    console.log('Índice seleccionado:', selectedIndex.value);
+};
+
 
 </script>
 
