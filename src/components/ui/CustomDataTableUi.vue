@@ -37,6 +37,7 @@
 
             <!-- Test dropdown -->
 
+
             <!-- Dropdown button -->
             <div class="relative inline-block text-left">
 
@@ -87,7 +88,6 @@
                                 @click="onChangeRowsPerPage(item)">{{ item
                                 }}</span>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -185,7 +185,7 @@ import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 
 import type { MatrizResponseInterface } from '../interfaces/matriz.interface'
-import { initDropdowns } from 'flowbite';
+import { initFlowbite } from 'flowbite';
 
 const { data, isPending } = useQuery({
     queryKey: ['matriz'],
@@ -199,7 +199,6 @@ const { data, isPending } = useQuery({
                 }
             }
         )
-        console.log(response.data)
         return response.data
     }
 })
@@ -238,7 +237,7 @@ watch(data, () => {
 })
 
 onMounted(() => {
-    initDropdowns()
+    initFlowbite()
     if (data.value) {
         columns.value = Object.keys(data.value[0]).map((col) => {
             return { head: col, isShowing: true }
@@ -310,6 +309,9 @@ const handleRowClick = (index: number) => {
     selectedIndex.value = index;
     console.log('Índice seleccionado:', selectedIndex.value);
 };
+
+
+// Borar
 
 
 </script>
